@@ -6,5 +6,4 @@ public record DadosCadastroMarca(
 		@NotBlank
 		String nome,
 		String pais) {
-	
 }

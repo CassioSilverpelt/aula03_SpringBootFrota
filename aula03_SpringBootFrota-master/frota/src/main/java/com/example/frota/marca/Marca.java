@@ -39,12 +39,4 @@ public class Marca {
 		}
 	}
 	
-	@PutMapping
-	@Transactional
-	public String atualizar (DadosAtualizacaoMarca dados) {
-		var marca = marcaRepository.getReferenceById(dados.id());
-		marca.atualizarInformacoes(dados);
-		return "redirect:marca";
-	}
-	
 }
