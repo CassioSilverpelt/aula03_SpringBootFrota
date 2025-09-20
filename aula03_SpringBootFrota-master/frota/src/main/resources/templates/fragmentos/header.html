@@ -25,16 +25,16 @@
 						role="button" data-bs-toggle="dropdown" aria-expanded="false"
 						th:classappend="${activePage == '' || activePage == 'caminhao'} ? 'active' : ''"
 						style="cursor: pointer;"> <i class="fas fa-film me-1"></i>
-							caminhao
+							Taxi
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="filmesDropdown">
 							<li><a class="dropdown-item"
 								th:classappend="${activePage == 'caminhao'} ? 'active' : ''"
-								th:href="@{/caminhao}"> <i class="fas fa-list me-1"></i> Listagem Caminhao</a>
+								th:href="@{/caminhao}"> <i class="fas fa-list me-1"></i> Listagem Taxi</a>
 							</li>
 							<li><a class="dropdown-item"
 								th:classappend="${activePage == 'caminhao'} ? 'active' : ''"
-								th:href="@{/caminhao/formulario}"> <i class="fas fa-star me-1"></i> Cadastrar Caminhao
+								th:href="@{/caminhao/formulario}"> <i class="fas fa-star me-1"></i> Cadastrar Taxi
 							</a></li>
 						</ul>
 					</li>

@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,5 +27,24 @@ public class Marca {
 	private String nome;
 	private String pais;
 	
- 
+	public Marca (DadosCadastroMarca dados) {
+		this.nome = dados.nome();
+		this.pais = dados.pais();
+	}
+	
+	public void atualizarInformacoes(@Valid DadosAtualizacaoMarca dados) {
+		if (dados.nome() != null) {
+			this.nome = dados.nome();
+			this.pais = dados.pais();
+		}
+	}
+	
+	@PutMapping
+	@Transactional
+	public String atualizar (DadosAtualizacaoMarca dados) {
+		var marca = marcaRepository.getReferenceById(dados.id());
+		marca.atualizarInformacoes(dados);
+		return "redirect:marca";
+	}
+	
 }
