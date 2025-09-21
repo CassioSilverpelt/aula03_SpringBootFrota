@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import jakarta.validation.Valid;
 
 @Controller
@@ -19,7 +18,6 @@ public class MarcaController {
  
 	@Autowired
 	private MarcaRepository marcaRepository;
- 
  
 	@GetMapping
 	public String carregaPaginaListagem(Model model){

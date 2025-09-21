@@ -23,18 +23,18 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="filmesDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false"
-						th:classappend="${activePage == '' || activePage == 'caminhao'} ? 'active' : ''"
+						th:classappend="${activePage == '' || activePage == 'taxi'} ? 'active' : ''"
 						style="cursor: pointer;"> <i class="fas fa-film me-1"></i>
 							Taxi
 						</a>
-						<ul class="dropdown-menu" aria-labelledby="filmesDropdown">
+						<ul class="dropdown-menu" aria-labelledby="TaxiDropdown">
 							<li><a class="dropdown-item"
-								th:classappend="${activePage == 'caminhao'} ? 'active' : ''"
-								th:href="@{/caminhao}"> <i class="fas fa-list me-1"></i> Listagem Taxi</a>
+								th:classappend="${activePage == 'taxi'} ? 'active' : ''"
+								th:href="@{/taxi}"> <i class="fas fa-list me-1"></i> Listagem Taxi</a>
 							</li>
 							<li><a class="dropdown-item"
 								th:classappend="${activePage == 'caminhao'} ? 'active' : ''"
-								th:href="@{/caminhao/formulario}"> <i class="fas fa-star me-1"></i> Cadastrar Taxi
+								th:href="@{/taxi/formulario}"> <i class="fas fa-star me-1"></i> Cadastrar Taxi
 							</a></li>
 						</ul>
 					</li>
