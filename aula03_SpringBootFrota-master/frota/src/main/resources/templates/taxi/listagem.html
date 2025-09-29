@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+ 
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/head :: head('Lista de Taxi')}"></head> 
+
+<body>
+    <header th:replace="~{fragmentos/header :: header(activePage='Taxi')}"></header>
+	<div class="container-fluid" style="max-width: 900px; margin: 0 auto;">
+		<h2 class="text-center"
+			th:text="${taxi!= null} ? 'Editar Taxi' : 'Lista de Taxi'"></h2>
+		<div th:if="${message != null}"
+			class="alert alert-success alert-dismissible fade show text-center"
+			role="alert">
+			[[${message}]]
+			<button type="button" class="close btn-sm" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		</div>
+    <a href="/taxi/formulario">Novo</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Modelo</th>
+                <th>Placa</th>
+                <th>Ano</th>
+                <th>Marca</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="taxi : ${lista}">
+                <td th:text="${taxi.modelo}"></td>
+                <td th:text="${taxi.placa}"></td>
+                <td th:text="${taxi.ano}"></td>
+                <td th:number="${taxi.cargaMaxima}"></td>
+                <td th:text="${taxi.marca.nome}"></td>
+                 
+                <td>
+					<a th:href="@{/taxi/formulario?id={id}(id=${taxi.id})}"><button>Editar</button></a>
+					
+					<form action="/taxi" method="post">
+						<input type="hidden" name="_method" value="delete">
+						<input type="hidden" name="id" th:value="${taxi.id}">
+						<input type="submit" value="Excluir">
+					</form>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragmentos/footer :: footer"></div>
+</body>
+</html>

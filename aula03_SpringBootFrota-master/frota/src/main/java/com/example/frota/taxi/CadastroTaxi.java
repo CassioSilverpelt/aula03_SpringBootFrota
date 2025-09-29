@@ -1,15 +1,14 @@
 package com.example.frota.taxi;
 
+import com.example.frota.marca.Marca;
+
 import jakarta.validation.constraints.NotBlank;
 
 public record CadastroTaxi(
 		@NotBlank
-		Long id,
-		String placa,
 		String modelo,
-		String marca,
-		double cargaMaxima) {
-
-	
-	
+		String placa,
+		Marca marca,
+		double cargaMaxima,
+		int ano) {
 }

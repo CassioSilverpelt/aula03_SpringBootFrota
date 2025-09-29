@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/head :: head('Manter Taxi')}"></head>
+<body>
+	<header th:replace="~{fragmentos/header :: header(activePage='Taxi')}"></header>
+	<div class="container-fluid" style="max-width: 900px; margin: 0 auto;">
+		<h2 class="text-center"
+			th:text="${taxi!= null} ? 'Editar Taxi' : 'Adicionar Novo Taxi'"></h2>
+		<div th:if="${message != null}"
+			class="alert alert-success alert-dismissible fade show text-center"
+			role="alert">
+			[[${message}]]
+			<button type="button" class="close btn-sm" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+ 
+		<div class="box">
+			<form method="post" action="/taxi">
+				<input type="hidden" name="_method" value="put"
+					th:if="${taxi!= null}"> <input type="hidden" name="id"
+					th:value="${taxi?.id}">
+				<div class="form-group" style="margin-top: 20px;">
+					<label for="marcaSelect">Adicionar Marca:</label> <select
+						id="marcaId" name="marca.id">
+						<option>-Selecione-</option>
+						<option th:each="marcaItem : ${marcas}"
+							th:selected="${taxi?.marca?.id == marcaItem.id}"
+							th:value="${marcaItem.id}" th:text="${marcaItem.nome}">
+						</option>
+					</select>
+				</div>
+				<div>
+					<label for="modelo"> Modelo: </label> <input type="text"
+						id="modelo" name="modelo" th:value="${taxi?.modelo}">
+				</div>
+				<div>
+					<label for="placa"> Placa: </label> <input type="text" id="placa"
+						name="placa" th:value="${taxi?.placa}">
+				</div>
+				<div>
+					<label for="ano"> Ano: </label> <input type="text" id="ano"
+						name="ano" th:value="${taxi?.ano}">
+				</div>
+				<div>
+					<label for="placa"> Carga Maxima: </label> <input type="number"
+						id="cargaMaxima" name="cargaMaxima"
+						th:value="${taxi?.cargaMaxima}">
+				</div>
+				
+				<input type="submit" value="Cadastrar">
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragmentos/footer :: footer"></div>
+</body>
+</html>

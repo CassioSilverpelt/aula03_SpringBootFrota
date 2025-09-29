@@ -16,20 +16,23 @@ import jakarta.validation.Valid;
 @RequestMapping("/marca")
 public class MarcaController {
  
+	//@Autowired
+	//private MarcaRepository marcaRepository;
+	
 	@Autowired
-	private MarcaRepository marcaRepository;
+	private MarcaService marcaService;
  
 	@GetMapping
 	public String carregaPaginaListagem(Model model){
 		System.out.println("Acessando /marca/listagem");
-		model.addAttribute("lista", marcaRepository.findAll());
+		model.addAttribute("lista", marcaService.procurarTodos());
 		return "marca/listagem";              
 	}
 	
 	@GetMapping ("/formulario")             
 	public String carregaPaginaFormulario(Long id, Model model) {
 		if(id != null) {
-			var marca = marcaRepository.getReferenceById(id);
+			var marca = marcaService.procurarPorId(id);
 			model.addAttribute("marca", marca);
 		}
 		return "marca/formulario";
@@ -38,21 +41,21 @@ public class MarcaController {
 	@PostMapping
 	@Transactional
 	public String cadastrar (@Valid DadosCadastroMarca dados) {
-		marcaRepository.save(new Marca(dados));
+		marcaService.salvar(new Marca(dados));
 		return "redirect:marca";
 	}
 	
 	@DeleteMapping
 	@Transactional
 	public String removeMarca (Long id) {
-		marcaRepository.deleteById(id);
+		marcaService.apagarPorId(id);;
 		return "redirect:marca";
 	}
 	
 	@PutMapping
 	@Transactional
 	public String atualizar (DadosAtualizacaoMarca dados) {
-		var marca = marcaRepository.getReferenceById(dados.id());
+		var marca = marcaService.procurarPorId(dados.id());
 		marca.atualizarInformacoes(dados);
 		return "redirect:marca";
 	}
