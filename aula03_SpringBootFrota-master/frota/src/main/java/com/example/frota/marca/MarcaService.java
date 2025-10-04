@@ -1,12 +1,13 @@
 package com.example.frota.marca;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class MarcaService {
@@ -25,7 +26,13 @@ public class MarcaService {
 		marcaRepository.deleteById(id);
 	}
 	
-	public Marca procurarPorId (@NotNull Long id) {
-		return marcaRepository.getReferenceById(id);
+	public Optional<Marca> procurarPorId(Long id) {
+	    return marcaRepository.findById(id);
+	}
+	
+	public void atualizarMarca(DadosAtualizacaoMarca dados) {
+	    Marca marca = marcaRepository.findById(dados.id())
+	        .orElseThrow(() -> new EntityNotFoundException("Marca não encontrada"));
+	    marca.atualizarInformacoes(dados);
 	}
 }
